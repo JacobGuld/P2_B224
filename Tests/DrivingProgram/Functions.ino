@@ -14,12 +14,18 @@ void SystemDrive() { //Main function to drive
     delay(100);
     while (digitalRead(BButton) != LOW) { //While Blue button is not pressed
       Distance = sensor.readRangeContinuousMillimeters(); //gets the distance and store in Distance
-      if (Distance > 50) { // if distance > the wished value, then drive forward
-        Speed = 50;
+      if (Distance > 100) { // if distance > the wished value, then drive forward
+        error = oenskede_afstand - measured_value;
+        integral = integral + error * dt;
+        derivative = (error - previous_error) / dt;
+        Speed = Kp * error + Ki * integral + Kd * derivative;// signal til motor
+        previous_error = error;
+
+        //delay(dt);
         Drive();
         delay(10);
       }
-      else if (Distance <= 50) {// if distance is under or equal to the wished value, then drive set the speed to 0
+      else if (Distance <= 100) {// if distance is under or equal to the wished value, then drive set the speed to 0
         Speed = 0;
         Drive();
         delay(10);

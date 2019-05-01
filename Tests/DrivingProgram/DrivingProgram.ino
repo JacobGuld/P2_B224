@@ -9,6 +9,14 @@ int Speed = 100; //Between 0 and 255
 int Distance; // Variable to store the measured distance
 VL53L0X sensor; //defines the sensor name as sensor
 
+double oenskede_afstand=420, measured_value=Distance, integral = 0, error, derivative, previous_error = 0; 
+double dt=1;
+double Kp=5;
+double Ki=3;
+double Kd=3;
+
+
+
 
 void setup() { // defines input, output and sensor
   Serial.begin(115200);
