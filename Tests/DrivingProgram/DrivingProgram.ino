@@ -7,6 +7,7 @@ const int YButton = 11; //Defines the yellow button pin
 const int BButton = 13; //Defines the blue button pin
 int Speed = 100; //Between 0 and 255
 int Distance; // Variable to store the measured distance
+int WantedDistance = 800;
 VL53L0X sensor; //defines the sensor name as sensor
 
 

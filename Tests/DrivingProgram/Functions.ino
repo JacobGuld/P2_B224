@@ -14,14 +14,16 @@ void SystemDrive() { //Main function to drive
     delay(100);
     while (digitalRead(BButton) != LOW) { //While Blue button is not pressed
       Distance = sensor.readRangeContinuousMillimeters(); //gets the distance and store in Distance
-      if (Distance > 50) { // if distance > the wished value, then drive forward
+      if (Distance > WantedDistance) { // if distance > the wanted value, then drive forward
         Speed = 50;
         Drive();
         delay(10);
       }
-      else if (Distance <= 50) {// if distance is under or equal to the wished value, then drive set the speed to 0
-        Speed = 0;
-        Drive();
+      else if (Distance <= WantedDistance) {// if distance is under or equal to the wanted value, then drive set the speed to 0
+        Speed = 10;
+        digitalWrite(HBroPin2, HIGH);
+        digitalWrite(HBroPin1, LOW);
+        analogWrite(PWMoutput, Speed);
         delay(10);
       }
     }
